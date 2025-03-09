@@ -1,0 +1,37 @@
+<div class="container mt-4 cart-container">
+    <div class="card">
+      <div class="card-header bg-primary text-white">
+        <h4 class="mb-0">Shopping Cart</h4>
+      </div>
+      <div class="card-body">
+        @for (item of cartItems; track $index) {
+            <div class="row align-items-center cart-item">
+                <div class="col-md-2 text-center">
+                  <img [src]="item.image" alt="Product" class="img-fluid rounded">
+                </div>
+                <div class="col-md-3">
+                  <h5 class="mb-0">{{ item.title }}</h5>
+                  <p class="text-muted mb-0">{{ item.category }}</p>
+                </div>
+                <div class="col-md-3 d-flex align-items-center quantity-control">
+                  <button class="btn btn-outline-secondary btn-sm me-2">-</button>
+                  <span class="fw-bold">1</span>
+                  <button class="btn btn-outline-secondary btn-sm ms-2">+</button>
+                </div>
+                <div class="col-md-2 text-center price">
+                  <h6 class="mb-0">{{ item.price }}</h6>
+                </div>
+                <div class="col-md-2 text-center">
+                  <button class="btn btn-danger btn-sm delete-btn"><i class="ri-delete-bin-6-line"></i></button>
+                </div>
+            </div>
+        }
+  
+        <div class="button-group">
+            <button class="btn btn-outline-secondary" routerLink="/">Continue Shopping</button>
+            <button class="btn btn-success mt-2">Checkout</button>
+        </div>
+      </div>
+    </div>
+</div>
+  

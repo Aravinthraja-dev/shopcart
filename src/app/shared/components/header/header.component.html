@@ -1,0 +1,64 @@
+<nav class="navbar navbar-expand-lg fixed-top" aria-label="Offcanvas navbar large">
+  <div class="container">
+    <button class="navbar-toggler" type="button" (click)="toggleMainMenu()" aria-label="Toggle navigation">
+      <i class="ri-menu-line"></i>
+    </button>
+    <a class="navbar-brand" href="#">{{ name }}</a>  
+    <div
+      class="offcanvas offcanvas-end"
+      [class.show]="mainMenuToggle"
+      tabindex="-1"
+      aria-labelledby="offcanvasNavbar2Label"
+      [attr.aria-hidden]="!mainMenuToggle"
+      >
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasNavbar2Label">{{ name }}</h5>
+        <button
+          type="button"
+          class="btn-close"
+          aria-label="Close"
+          (click)="toggleMainMenu()"
+        ></button>
+      </div>
+      <div class="offcanvas-body">
+        <div class="navbar-nav justify-content-center flex-grow-1 pe-3">
+          <form class="d-flex mt-3 mt-lg-0" role="search">
+            <input 
+              #query
+              (keyup)="onFilter(query.value)"
+              class="form-control me-2" 
+              type="search" placeholder="Search" 
+              aria-label="Search">
+              @if (filteredSuggestions?.length > 0) {
+                <ul class="autocomplete-list">
+                  @for (suggestion of filteredSuggestions; track $index) {
+                    <li  
+                      [routerLink]="['/products', suggestion.id]"
+                      (click)="selectSuggestion(suggestion, query)">
+                      {{ suggestion.title }}
+                  </li>
+                  }
+                </ul>
+              }            
+          </form> 
+        </div>
+      </div>
+    </div>
+    <div class="shopping-cart">
+      <i class="ri-shopping-cart-fill" [routerLink]="['/cart']">
+        <span class="badge badge-light">{{ cartCount }}</span>
+      </i>
+    </div>
+    <div ngbDropdown class="dropdown text-end">
+      <a href="#" ngbDropdownToggle class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+        <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
+      </a>
+      <ul ngbDropdownMenu class="dropdown-menu dropdown-menu-end text-small">
+        <li><a ngbDropdownItem class="dropdown-item" [routerLink]="['/profile']">Profile</a></li>
+        <li><a ngbDropdownItem class="dropdown-item" href="#">Sign out</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+  
+
